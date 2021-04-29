@@ -1,17 +1,19 @@
-Write-Host  -ForegroundColor Cyan "Starting Clark Cloud Imageing ..."
+# Starting the Imaging
+Write-Host -ForegroundColor Green "Starting Clark Imaging ZTI"
 Start-Sleep -Seconds 5
 
-# Change Display Resolution for Virtual Machine
-if ((Get-MyComputerModel) -match 'Virtual') {
-    Write-Host  -ForegroundColor Cyan "Setting Display Resolution to 1600x"
-    Set-DisRes 1600
-}
+# Updating OSD 
+Write-Host -ForegroundColor Green "Updating OSD PowerShell Module"
+Install-Module OSD -Force
+Write-Host -ForegroundColor Green "Importing OSD PowerShell Module"
+Import-Module OSD -Force
 
-#Start Zero Touch 
-Write-Host  -ForegroundColor Cyan "Start Windows Installation ..."
+# Start the Script
+Write-Host -ForegroundColor Green "Start Cloud Image..."
 Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
 
-#Restart from WinPE
-Write-Host  -ForegroundColor Cyan "Restarting in 20 seconds!"
+# Restart from WinPE
+Write-Host -ForegroundColor Green "Restarting in 20 seconds!"
 Start-Sleep -Seconds 20
+
 wpeutil reboot
