@@ -8,7 +8,7 @@ if ((Get-MyComputerModel) -match 'Virtual') {
 }
 
 #Start Zero Touch 
-Write-Host  -ForegroundColor Cyan "Start OSDCloud with MY Parameters"
+Write-Host  -ForegroundColor Cyan "Start Windows Installation ..."
 Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
 
 #Restart from WinPE
