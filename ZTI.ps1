@@ -4,7 +4,7 @@ Start-Sleep -Seconds 5
 
 # Start the Script
 Write-Host -ForegroundColor Green "Start Cloud Image..."
-Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI 
 
 # Restart from WinPE
 Write-Host -ForegroundColor Green "Restarting in 20 seconds!"
