@@ -3,17 +3,17 @@
  # Created : 05/10/2021 by Danial
  #>
 
-Write-Host "================================================================" -ForegroundColor Blue
-Write-Host "================ Clark Construction Group, LLC =================" -ForegroundColor Blue
-Write-Host "================ Cloud Image Deployment Script =================" -ForegroundColor Blue
-Write-Host "================================================================" -ForegroundColor Blue
+Write-Host "=========================================================================" -ForegroundColor Blue
+Write-Host "===================== Clark Construction Group, LLC =====================" -ForegroundColor Blue
+Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Blue
+Write-Host "=========================================================================" -ForegroundColor Blue
 
 # Starting the Imaging
 Write-Host ""
-Write-Host "================================================================" -ForegroundColor Blue
-Write-Host "===================== Starting Imaging ZTI =====================" -ForegroundColor Blue
-Write-Host "============= Edition - 20H2 == Build - 19042.985 ==============" -ForegroundColor Blue
-Write-Host "================================================================" -ForegroundColor Blue
+Write-Host "=========================================================================" -ForegroundColor Blue
+Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Blue
+Write-Host "================== Edition - 20H2 == Build - 19042.985 ==================" -ForegroundColor Blue
+Write-Host "=========================================================================" -ForegroundColor Blue
 Start-Sleep -Seconds 5
 
 # Updating Module
