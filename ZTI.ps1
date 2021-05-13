@@ -12,7 +12,7 @@ Write-Host "================================================================" -F
 Write-Host ""
 Write-Host "================================================================" -ForegroundColor Blue
 Write-Host "===================== Starting Imaging ZTI =====================" -ForegroundColor Blue
-Write-Host "============= Edition - 20H2 == Build - 19402.985 ==============" -ForegroundColor Blue
+Write-Host "============= Edition - 20H2 == Build - 19042.985 ==============" -ForegroundColor Blue
 Write-Host "================================================================" -ForegroundColor Blue
 Start-Sleep -Seconds 5
 
