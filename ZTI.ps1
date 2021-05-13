@@ -3,17 +3,17 @@
  # Created : 05/10/2021 by Danial
  #>
 
-Write-Host "=========================================================================" -ForegroundColor Blue
-Write-Host "===================== Clark Construction Group, LLC =====================" -ForegroundColor Blue
-Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Blue
-Write-Host "=========================================================================" -ForegroundColor Blue
+Write-Host "=========================================================================" -ForegroundColor Cyan
+Write-Host "===================== Clark Construction Group, LLC =====================" -ForegroundColor Cyan
+Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
+Write-Host "=========================================================================" -ForegroundColor Cyan
 
 # Starting the Imaging
 Write-Host ""
-Write-Host "=========================================================================" -ForegroundColor Blue
-Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Blue
-Write-Host "================== Edition - 20H2 == Build - 19042.985 ==================" -ForegroundColor Blue
-Write-Host "=========================================================================" -ForegroundColor Blue
+Write-Host "=========================================================================" -ForegroundColor Cyan
+Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
+Write-Host "================== Edition - 20H2 == Build - 19042.985 ==================" -ForegroundColor Cyan
+Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
 # Updating Module
@@ -27,7 +27,7 @@ Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amaz
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
 
 # Restart from WinPE
-Write-Host -ForegroundColor Green "Restarting in 10 seconds!"
+Write-Host -ForegroundColor Cyan "Restarting in 10 seconds!"
 Start-Sleep -Seconds 10
 
 wpeutil reboot
