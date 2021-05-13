@@ -3,13 +3,10 @@
  # Created : 05/10/2021 by Danial
  #>
 
+# Starting the Imaging
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "===================== Clark Construction Group, LLC =====================" -ForegroundColor Cyan
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
-Write-Host "=========================================================================" -ForegroundColor Cyan
-
-# Starting the Imaging
-Write-Host ""
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
 Write-Host "================== Edition - 20H2 == Build - 19042.985 ==================" -ForegroundColor Cyan
