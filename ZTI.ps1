@@ -9,7 +9,7 @@ Write-Host "===================== Clark Construction Group, LLC ================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================== Edition - 20H2 == Build - 19042.985 ==================" -ForegroundColor Cyan
+Write-Host "================== Edition - 20H2 == Build - 19042.1052 =================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
