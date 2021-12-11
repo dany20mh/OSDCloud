@@ -5,7 +5,6 @@
 
 # Starting the Imaging
 Write-Host "=========================================================================" -ForegroundColor Cyan
-Write-Host "===================== Clark Construction Group, LLC =====================" -ForegroundColor Cyan
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
