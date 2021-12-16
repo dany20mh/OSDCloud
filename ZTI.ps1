@@ -17,7 +17,7 @@ Install-Module OSD -Force
 Import-Module OSD -Force
 
 # Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_20H2_2021_11_19042_1348.esd"
+Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_20H2_2021_12_19042_1415.esd"
 
 # Set Drive Lable Name
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
