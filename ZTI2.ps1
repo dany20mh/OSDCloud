@@ -21,6 +21,7 @@ $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine"))
     (New-Object System.Management.Automation.Host.ChoiceDescription("&AAD", "AzureAD Joined Machine")),
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel"))
+    (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC*", "Regular Image for Donation PC"))
 ))
 
 $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
@@ -43,6 +44,57 @@ If ( $action -eq 2 ) {
     Write-Host "========================= Travel PC Deployment ==========================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
+} 
+
+If ( $action -eq 3 ) {
+    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Write-Host "======================== Donation PC Deployment =========================" -ForegroundColor Cyan
+    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
+
+    $Global:StartOSDCloudGUI = $null
+    $Global:StartOSDCloudGUI = [ordered]@{
+        ApplyManufacturerDrivers   = $false
+        ApplyCatalogDrivers        = $false
+        ApplyCatalogFirmware       = $false
+        AutopilotJsonChildItem     = $false
+        AutopilotJsonItem          = $false
+        AutopilotJsonName          = $false
+        AutopilotJsonObject        = $false
+        AutopilotOOBEJsonChildItem = $false
+        AutopilotOOBEJsonItem      = $false
+        AutopilotOOBEJsonName      = $false
+        AutopilotOOBEJsonObject    = $false
+        ImageFileFullName          = $false
+        ImageFileItem              = $false
+        ImageFileName              = $false
+        OOBEDeployJsonChildItem    = $false
+        OOBEDeployJsonItem         = $false
+        OOBEDeployJsonName         = $false
+        OOBEDeployJsonObject       = $false
+        OSBuild                    = '22H2'
+        OSEdition                  = 'Enterprise'
+        OSImageIndex               = 1
+        OSLanguage                 = 'en-us'
+        OSLicense                  = 'Volume'
+        OSVersion                  = 'Windows 11'
+        Restart                    = $false
+        SkipAutopilot              = $true
+        SkipAutopilotOOBE          = $true
+        SkipODT                    = $true
+        SkipOOBEDeploy             = $true
+        ZTI                        = $true
+    }
+    Start-OSDCloud
+
+    # Set Drive Lable Name
+    Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
+
+    # Restart from WinPE
+    Write-Host -ForegroundColor Cyan "Restarting in 10 seconds!"
+    Start-Sleep -Seconds 10
+
+    wpeutil reboot
 } 
 
 # Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI
