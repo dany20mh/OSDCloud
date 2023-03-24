@@ -97,7 +97,7 @@ If ( $action -eq 3 ) {
 } 
 
 # Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_02_22621_1265.esd"
+Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_03_22621_1413.esd"
 
 # Set Drive Lable Name
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
