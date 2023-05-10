@@ -8,7 +8,7 @@ Write-Host "====================================================================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================= Edition - 22H2 == Build - 22621.1555 ==================" -ForegroundColor Cyan
+Write-Host "================= Edition - 22H2 == Build - 22621.1702 ==================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
@@ -97,7 +97,7 @@ If ( $action -eq 3 ) {
 } 
 
 # Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_04_22621_1555.esd"
+Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_05_22621_1702.esd"
 
 # Set Drive Lable Name
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
