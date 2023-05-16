@@ -8,13 +8,13 @@ Write-Host "====================================================================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================== Edition - 22H2 == Build - 22621.819 ==================" -ForegroundColor Cyan
+Write-Host "================= Edition - 22H2 == Build - 22621.1702 ==================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
 # Updating Module
-Install-Module OSD -Force
-Import-Module OSD -Force
+#Install-Module OSD -Force
+#Import-Module OSD -Force
 
 # Select Deployment Method
 $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
@@ -50,7 +50,6 @@ If ( $action -eq 3 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "======================== Donation PC Deployment =========================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
-    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
 
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
@@ -98,7 +97,7 @@ If ( $action -eq 3 ) {
 } 
 
 # Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2022_11_22621_819.esd"
+Start-OSDCloud -Product NODRIVER -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_05_22621_1702.esd"
 
 # Set Drive Lable Name
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
