@@ -13,8 +13,8 @@ Write-Host "====================================================================
 Start-Sleep -Seconds 5
 
 # Updating Module
-Install-Module OSD -Force
-Import-Module OSD -Force
+#Install-Module OSD -Force
+#Import-Module OSD -Force
 
 # Select Deployment Method
 $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
