@@ -36,14 +36,14 @@ If ( $action -eq 1 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================= AzureAD Deployment ============================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
-    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/fli8o80p0wccwj688zhmixgjzk15wzom.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
+    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/fli8o80p0wccwj688zhmixgjzk15wzom.json" -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
 } 
 
 If ( $action -eq 2 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================= Travel PC Deployment ==========================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
-    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
+    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
 } 
 
 If ( $action -eq 3 ) {
