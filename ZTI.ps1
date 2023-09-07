@@ -72,10 +72,10 @@ If ( $action -eq 3 ) {
         OOBEDeployJsonName         = $false
         OOBEDeployJsonObject       = $false
         OSBuild                    = '22H2'
-        OSEdition                  = 'Enterprise'
-        OSImageIndex               = 1
+        OSEdition                  = 'Pro'
+        OSImageIndex               = 9
         OSLanguage                 = 'en-us'
-        OSLicense                  = 'Volume'
+        OSLicense                  = 'Retail'
         OSVersion                  = 'Windows 11'
         Restart                    = $false
         SkipAutopilot              = $true
