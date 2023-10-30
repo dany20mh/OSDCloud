@@ -8,7 +8,7 @@ Write-Host "====================================================================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================= Edition - 22H2 == Build - 22621.2283 ==================" -ForegroundColor Cyan
+Write-Host "================= Edition - 22H2 == Build - 22621.2428 ==================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
@@ -96,8 +96,8 @@ If ( $action -eq 3 ) {
     wpeutil reboot
 } 
 
-# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_09_22621_2283.esd"
+# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 22H2 -OSEdition Enterprise -ZTI
+Start-OSDCloud -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_10_22621_2428.esd"
 
 
 # Set Drive Lable Name
