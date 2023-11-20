@@ -8,7 +8,7 @@ Write-Host "====================================================================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================= Edition - 22H2 == Build - 22621.2428 ==================" -ForegroundColor Cyan
+Write-Host "================= Edition - 23H2 == Build - 22631.2715 ==================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
@@ -21,7 +21,7 @@ $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine"))
     (New-Object System.Management.Automation.Host.ChoiceDescription("&AAD", "AzureAD Joined Machine")),
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel"))
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC*", "Regular Image for Donation PC"))
+    (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC", "Regular Image for Donation PC"))
 ))
 
 $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
@@ -71,7 +71,7 @@ If ( $action -eq 3 ) {
         OOBEDeployJsonItem         = $false
         OOBEDeployJsonName         = $false
         OOBEDeployJsonObject       = $false
-        OSBuild                    = '22H2'
+        OSBuild                    = '23H2'
         OSEdition                  = 'Pro'
         OSImageIndex               = 9
         OSLanguage                 = 'en-us'
@@ -96,8 +96,8 @@ If ( $action -eq 3 ) {
     wpeutil reboot
 } 
 
-# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 22H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_10_22621_2428.esd"
+# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 23H2 -OSEdition Enterprise -ZTI
+Start-OSDCloud -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2023_11_22631_2715.esd"
 
 
 # Set Drive Lable Name
