@@ -71,7 +71,7 @@ If ( $action -eq 3 ) {
         OOBEDeployJsonItem         = $false
         OOBEDeployJsonName         = $false
         OOBEDeployJsonObject       = $false
-        OSBuild                    = '23H2'
+        OSBuild                    = '22H2'
         OSEdition                  = 'Pro'
         OSImageIndex               = 9
         OSLanguage                 = 'en-us'
