@@ -8,7 +8,7 @@ Write-Host "====================================================================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================= Edition - 22H2 == Build - 22621.1702 ==================" -ForegroundColor Cyan
+Write-Host "================= Edition - 24H2 == Build - 26052.1100 ==================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
 
@@ -21,7 +21,7 @@ $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine"))
     (New-Object System.Management.Automation.Host.ChoiceDescription("&AAD", "AzureAD Joined Machine")),
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel"))
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC*", "Regular Image for Donation PC"))
+    (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC", "Regular Image for Donation PC"))
 ))
 
 $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
@@ -36,14 +36,14 @@ If ( $action -eq 1 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================= AzureAD Deployment ============================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
-    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/fli8o80p0wccwj688zhmixgjzk15wzom.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
+    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/fli8o80p0wccwj688zhmixgjzk15wzom.json" -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
 } 
 
 If ( $action -eq 2 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================= Travel PC Deployment ==========================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
-    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Autopilot\Profiles\AutopilotProfile.json
+    Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
 } 
 
 If ( $action -eq 3 ) {
@@ -71,11 +71,11 @@ If ( $action -eq 3 ) {
         OOBEDeployJsonItem         = $false
         OOBEDeployJsonName         = $false
         OOBEDeployJsonObject       = $false
-        OSBuild                    = '22H2'
-        OSEdition                  = 'Enterprise'
-        OSImageIndex               = 1
+        OSBuild                    = '23H2'
+        OSEdition                  = 'Pro'
+        OSImageIndex               = 9
         OSLanguage                 = 'en-us'
-        OSLicense                  = 'Volume'
+        OSLicense                  = 'Retail'
         OSVersion                  = 'Windows 11'
         Restart                    = $false
         SkipAutopilot              = $true
@@ -96,8 +96,9 @@ If ( $action -eq 3 ) {
     wpeutil reboot
 } 
 
-# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI
-Start-OSDCloud -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_22H2_2023_05_22621_1702.esd"
+# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 23H2 -OSEdition Enterprise -ZTI
+Start-OSDCloud -ZTI -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_24H2_2024_01_26052_1100.esd"
+
 
 # Set Drive Lable Name
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
