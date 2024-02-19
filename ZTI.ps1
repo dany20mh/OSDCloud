@@ -3,6 +3,7 @@
  # Created : 05/10/2021 by Danial
  #>
 
+Clear-Host
 # Starting the Imaging
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
