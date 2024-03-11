@@ -16,7 +16,7 @@ Start-Sleep -Seconds 5
 # Updating Module
 #Install-Module OSD -Force
 #Import-Module OSD -Force
-iex (irm functions.garytown.com)
+#iex (irm functions.garytown.com)
 
 # Select Deployment Method
 $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
