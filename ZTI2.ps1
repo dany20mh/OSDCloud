@@ -108,12 +108,10 @@ If ( $action -eq 3 ) {
 # Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 23H2 -OSEdition Enterprise -ZTI
 $Global:StartOSDCloudGUI = [ordered]@{
     ZTI                        = $true
-    DriverPackName             = 'NONE'
-    WindowsUpdateDrivers       = $false
     HPIADrivers                = $true
     HPIAFirmware               = $true
     HPTPMUpdate                = $true
-    HPBIOSUpdate               = $true
+    HPBIOSUpdate               = $false
     ImageFileUrl               = "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_02_22631_3155_PRO.esd"
 
 }
