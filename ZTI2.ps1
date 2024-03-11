@@ -112,10 +112,9 @@ $Global:StartOSDCloudGUI = [ordered]@{
     HPIAFirmware               = $true
     HPTPMUpdate                = $true
     HPBIOSUpdate               = $false
-    ImageFileUrl               = "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_02_22631_3155_PRO.esd"
-
 }
-Start-OSDCloud
+
+Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_02_22631_3155_PRO.esd"
 
 
 # Set Drive Lable Name
