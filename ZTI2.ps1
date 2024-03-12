@@ -3,6 +3,21 @@
  # Created : 05/10/2021 by Danial
  #>
 
+# Making sure the module is up to date
+Clear-Host
+$version = (Get-Module -ListAvailable OSD) | Sort-Object Version -Descending  | Select-Object Version -First 1
+$stringver = $version | Select-Object @{n = 'ModuleVersion'; e = { $_.Version -as [string] } }
+$a = $stringver | Select-Object Moduleversion -ExpandProperty Moduleversion
+$psgalleryversion = Find-Module -Name OSD | Sort-Object Version -Descending | Select-Object Version -First 1
+$onlinever = $psgalleryversion | Select-Object @{n = 'OnlineVersion'; e = { $_.Version -as [string] } }
+$b = $onlinever | Select-Object OnlineVersion -ExpandProperty OnlineVersion
+ 
+if ([version]"$a" -ge [version]"$b") {}
+else {
+  Install-Module -Name OSD -Force
+  Import-Module OSD                
+}
+
 Clear-Host
 # Starting the Imaging
 Write-Host "=========================================================================" -ForegroundColor Cyan
