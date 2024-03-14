@@ -88,24 +88,28 @@ If ( $action -eq 3 ) {
         OOBEDeployJsonItem         = $false
         OOBEDeployJsonName         = $false
         OOBEDeployJsonObject       = $false
-        OSBuild                    = '23H2'
-        OSEdition                  = 'Pro'
-        OSImageIndex               = 9
-        OSLanguage                 = 'en-us'
-        OSLicense                  = 'Retail'
-        OSVersion                  = 'Windows 11'
         Restart                    = $false
         SkipAutopilot              = $true
         SkipAutopilotOOBE          = $true
         SkipODT                    = $true
         SkipOOBEDeploy             = $true
         ZTI                        = $true
-        WindowsUpdateDrivers       = $false
         HPIADrivers                = $true
         HPIAFirmware               = $true
         HPTPMUpdate                = $true
-        HPBIOSUpdate               = $true
-
+        HPBIOSUpdate               = $false
+        OSName                     = 'Windows 11 23H2 x64'
+        OSEdition                  = 'Pro'
+        OSActivation               = 'Retail'
+        OSLanguage                 = 'en-us'
+        updateDiskDrivers          = $true
+        updateFirmware             = $true
+        updateNetworkDrivers       = $true
+        updateSCSIDrivers          = $true
+        SyncMSUpCatDriverUSB       = $true
+        WindowsUpdate              = $true
+        WindowsUpdateDrivers       = $true
+        
     }
     Start-OSDCloud
 
@@ -125,7 +129,7 @@ $Global:StartOSDCloudGUI = [ordered]@{
     HPIADrivers                = $true
     HPIAFirmware               = $true
     HPTPMUpdate                = $true
-    HPBIOSUpdate               = $true
+    HPBIOSUpdate               = $false
 
     OSName = 'Windows 11 23H2 x64'
     OSEdition = 'Pro'
