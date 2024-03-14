@@ -100,7 +100,6 @@ If ( $action -eq 3 ) {
         SkipODT                    = $true
         SkipOOBEDeploy             = $true
         ZTI                        = $true
-        DriverPackName             = 'NONE'
         WindowsUpdateDrivers       = $false
         HPIADrivers                = $true
         HPIAFirmware               = $true
@@ -126,10 +125,24 @@ $Global:StartOSDCloudGUI = [ordered]@{
     HPIADrivers                = $true
     HPIAFirmware               = $true
     HPTPMUpdate                = $true
-    HPBIOSUpdate               = $false
+    HPBIOSUpdate               = $true
+
+    OSReleaseID = '23H2'
+    OSEdition = 'Pro'
+    OSActivation = 'Retail'
+    OSVersion = 'Windows 11'
+    updateDiskDrivers = $true
+    updateFirmware = $true
+    updateNetworkDrivers =$true
+    updateSCSIDrivers = $true
+    SyncMSUpCatDriverUSB = $true
+    WindowsUpdate = $true
+    WindowsUpdateDrivers = $true
+
 }
 
-Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_02_22631_3155_PRO.esd"
+Start-OSDCloud
+#Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_02_22631_3155_PRO.esd"
 
 
 # Set Drive Lable Name
