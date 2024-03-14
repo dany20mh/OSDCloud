@@ -131,6 +131,7 @@ $Global:StartOSDCloudGUI = [ordered]@{
     OSEdition = 'Pro'
     OSActivation = 'Retail'
     OSVersion = 'Windows 11'
+    OSLanguage = 'en-us'
     updateDiskDrivers = $true
     updateFirmware = $true
     updateNetworkDrivers =$true
