@@ -127,7 +127,7 @@ $Global:StartOSDCloudGUI = [ordered]@{
     HPTPMUpdate                = $true
     HPBIOSUpdate               = $true
 
-    OSReleaseID = '23H2'
+    OSBuild = '23H2'
     OSEdition = 'Pro'
     OSActivation = 'Retail'
     OSVersion = 'Windows 11'
