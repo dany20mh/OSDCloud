@@ -43,6 +43,22 @@ $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
 
 $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
 
+# Automated Timer
+$timer = 30  # Time in seconds
+$elapsed = 0
+while ($elapsed -lt $timer) {
+    Write-Host "Automatically selecting the default option in $($timer - $elapsed) seconds..." -ForegroundColor Yellow
+    Start-Sleep -Seconds 1
+    $elapsed++
+}
+
+# Default selection after the timer
+if ($elapsed -ge $timer) {
+    $defaultChoice = 0  # Change this to the index of the default choice
+    Write-Host "No user input received. Automatically selecting the default option." -ForegroundColor Yellow
+    $action = $defaultChoice
+}
+
 If ( $action -eq 0 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================== Hybrid Deployment ============================" -ForegroundColor Cyan
