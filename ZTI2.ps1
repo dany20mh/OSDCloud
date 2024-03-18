@@ -24,14 +24,9 @@ Write-Host "====================================================================
 Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-Write-Host "================= Edition - 23H2 == Build - 22631.3155 ==================" -ForegroundColor Cyan
+Write-Host "================= Edition - 23H2 == Build - 22631.3296 ==================" -ForegroundColor Cyan
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 5
-
-# Updating Module
-#Install-Module OSD -Force
-#Import-Module OSD -Force
-#iex (irm functions.garytown.com)
 
 # Select Deployment Method
 $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
@@ -42,6 +37,25 @@ $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
 ))
 
 $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
+
+$Global:StartOSDCloudGUI = [ordered]@{
+    ZTI                        = $true
+    HPIADrivers                = $true
+    HPIAFirmware               = $true
+    HPTPMUpdate                = $true
+    HPBIOSUpdate               = $false
+    OSName                     = 'Windows 11 23H2 x64'
+    OSEdition                  = 'Pro'
+    OSActivation               = 'Retail'
+    OSLanguage                 = 'en-us'
+    updateDiskDrivers          = $true
+    updateFirmware             = $true
+    updateNetworkDrivers       = $true
+    updateSCSIDrivers          = $true
+    SyncMSUpCatDriverUSB       = $true
+    WindowsUpdate              = $true
+    WindowsUpdateDrivers       = $true
+}
 
 If ( $action -eq 0 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -92,24 +106,7 @@ If ( $action -eq 3 ) {
         SkipAutopilot              = $true
         SkipAutopilotOOBE          = $true
         SkipODT                    = $true
-        SkipOOBEDeploy             = $true
-        ZTI                        = $true
-        HPIADrivers                = $true
-        HPIAFirmware               = $true
-        HPTPMUpdate                = $true
-        HPBIOSUpdate               = $false
-        OSName                     = 'Windows 11 23H2 x64'
-        OSEdition                  = 'Pro'
-        OSActivation               = 'Retail'
-        OSLanguage                 = 'en-us'
-        updateDiskDrivers          = $true
-        updateFirmware             = $true
-        updateNetworkDrivers       = $true
-        updateSCSIDrivers          = $true
-        SyncMSUpCatDriverUSB       = $true
-        WindowsUpdate              = $true
-        WindowsUpdateDrivers       = $true
-        
+        SkipOOBEDeploy             = $true        
     }
     Start-OSDCloud
 
@@ -123,31 +120,7 @@ If ( $action -eq 3 ) {
     wpeutil reboot
 } 
 
-# Start-OSDCloud -Product NODRIVER -OSLanguage en-us -OSBuild 23H2 -OSEdition Enterprise -ZTI
-$Global:StartOSDCloudGUI = [ordered]@{
-    ZTI                        = $true
-    HPIADrivers                = $true
-    HPIAFirmware               = $true
-    HPTPMUpdate                = $true
-    HPBIOSUpdate               = $false
-
-    OSName = 'Windows 11 23H2 x64'
-    OSEdition = 'Pro'
-    OSActivation = 'Retail'
-    OSLanguage = 'en-us'
-    updateDiskDrivers = $true
-    updateFirmware = $true
-    updateNetworkDrivers =$true
-    updateSCSIDrivers = $true
-    SyncMSUpCatDriverUSB = $true
-    WindowsUpdate = $true
-    WindowsUpdateDrivers = $true
-
-}
-
-Start-OSDCloud
-#Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_02_22631_3155_PRO.esd"
-
+Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_03_22631_3296_PRO.esd"
 
 # Set Drive Lable Name
 Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
