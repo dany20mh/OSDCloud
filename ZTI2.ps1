@@ -34,34 +34,14 @@ Start-Sleep -Seconds 5
 #iex (irm functions.garytown.com)
 
 # Select Deployment Method
-$actionChoice = [System.Management.Automation.Host.ChoiceDescription[]]@(
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine")),
+$actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
+    (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine"))
     (New-Object System.Management.Automation.Host.ChoiceDescription("&AAD", "AzureAD Joined Machine")),
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel")),
+    (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel"))
     (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC", "Regular Image for Donation PC"))
-)
+))
 
-# Prompt for choice with a timer
-$action = $null
-$timer = New-Object System.Diagnostics.Stopwatch
-$timer.Start()
-
-while (-not $action -and $timer.Elapsed.TotalSeconds -lt 30) {
-    if ($Host.UI.RawUI.KeyAvailable) {
-        $key = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-        if ($key.Key -eq "Enter") {
-            break
-        }
-    }
-}
-
-# Select default option if no input within the specified time
-if (-not $action) {
-    $action = 0  # Default option index
-}
-
-$timer.Stop()
-
+$action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
 
 If ( $action -eq 0 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
