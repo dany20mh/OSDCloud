@@ -34,30 +34,20 @@ Start-Sleep -Seconds 5
 #iex (irm functions.garytown.com)
 
 # Select Deployment Method
+$timeoutMinutes = 1  # Set your desired timeout
+
+timeout /t ($timeoutMinutes * 15)  # Convert minutes to seconds
+
 $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]](@(
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine"))
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&AAD", "AzureAD Joined Machine")),
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel"))
-    (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC", "Regular Image for Donation PC"))
-    ))
+  (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine"))
+  (New-Object System.Management.Automation.Host.ChoiceDescription("&AAD", "AzureAD Joined Machine")),
+  (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "AzureAD Joined Machine for Travel"))
+  (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC", "Regular Image for Donation PC"))
+))
 
 $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
+$action = 0
 
-# Automated Timer
-$timer = 30  # Time in seconds
-$elapsed = 0
-while ($elapsed -lt $timer) {
-    Write-Host "Automatically selecting the default option in $($timer - $elapsed) seconds..." -ForegroundColor Yellow
-    Start-Sleep -Seconds 1
-    $elapsed++
-}
-
-# Default selection after the timer
-if ($elapsed -ge $timer) {
-    $defaultChoice = 0  # Change this to the index of the default choice
-    Write-Host "No user input received. Automatically selecting the default option." -ForegroundColor Yellow
-    $action = $defaultChoice
-}
 
 If ( $action -eq 0 ) {
     Write-Host "=========================================================================" -ForegroundColor Cyan
