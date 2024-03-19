@@ -140,5 +140,5 @@ if ([version]"$a" -ge [version]'24.3.10.1') {
 
 }
 else {
-    Write-Host "The required module is not loaded. Please check the network connection and try again!"
+    Write-Host -ForegroundColor Cyan "The required module is not loaded. Please check the network connection and try again!"
 }
