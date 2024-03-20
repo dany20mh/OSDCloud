@@ -50,7 +50,7 @@ if ([version]"$a" -ge [version]'24.3.10.1') {
         HPIADrivers          = $true
         HPIAFirmware         = $true
         HPTPMUpdate          = $true
-        HPBIOSUpdate         = $false
+        HPBIOSUpdate         = $true
         OSName               = 'Windows 11 23H2 x64'
         OSEdition            = 'Pro'
         OSActivation         = 'Retail'
