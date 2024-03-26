@@ -112,7 +112,23 @@ if ([version]"$a" -ge [version]'24.3.10.1') {
             SkipAutopilot              = $true
             SkipAutopilotOOBE          = $true
             SkipODT                    = $true
-            SkipOOBEDeploy             = $true        
+            SkipOOBEDeploy             = $true 
+            ZTI                        = $true
+            HPIADrivers                = $true
+            HPIAFirmware               = $true
+            HPTPMUpdate                = $true
+            HPBIOSUpdate               = $true
+            OSName                     = 'Windows 11 23H2 x64'
+            OSEdition                  = 'Pro'
+            OSActivation               = 'Retail'
+            OSLanguage                 = 'en-us'
+            updateDiskDrivers          = $true
+            updateFirmware             = $true
+            updateNetworkDrivers       = $true
+            updateSCSIDrivers          = $true
+            SyncMSUpCatDriverUSB       = $true
+            WindowsUpdate              = $true
+            WindowsUpdateDrivers       = $true       
         }
         Start-OSDCloud
 
