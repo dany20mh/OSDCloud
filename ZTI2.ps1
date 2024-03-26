@@ -89,7 +89,6 @@ if ([version]"$a" -ge [version]'24.3.10.1') {
         Write-Host "======================== Donation PC Deployment =========================" -ForegroundColor Cyan
         Write-Host "=========================================================================" -ForegroundColor Cyan
 
-        $Global:StartOSDCloudGUI = $null
         $Global:StartOSDCloudGUI = [ordered]@{
             ApplyManufacturerDrivers   = $false
             ApplyCatalogDrivers        = $false
