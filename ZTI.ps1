@@ -31,7 +31,7 @@ if ([version]"$a" -ge [version]'24.3.10.1') {
     Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-    Write-Host "================= Edition - 23H2 == Build - 22631.3447 ==================" -ForegroundColor Cyan
+    Write-Host "================= Edition - 23H2 == Build - 22631.3593 ==================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Start-Sleep -Seconds 5
 
@@ -142,7 +142,7 @@ if ([version]"$a" -ge [version]'24.3.10.1') {
         wpeutil reboot
     } 
 
-    Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_04_22631_3447_PRO.esd"
+    Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_05_22631_3593_PRO.esd"
 
     # Set Drive Lable Name
     Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
