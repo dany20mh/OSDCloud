@@ -29,7 +29,7 @@ if ($currentVersion -ge [version]'24.3.10.1') {
     Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-    Write-Host "================= Edition - 23H2 == Build - 22631.3593 ==================" -ForegroundColor Cyan
+    Write-Host "================= Edition - 24H2 == Build - 26100.712 ===================" -ForegroundColor Cyan
     Write-Host "=========================================================================" -ForegroundColor Cyan
     Start-Sleep -Seconds 5
 
@@ -125,7 +125,7 @@ if ($currentVersion -ge [version]'24.3.10.1') {
 
     # Common deployment tasks for non-donation PCs
     if ($action -ne 3) {
-        Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.amazonaws.com/Kaseya/Windows10/install_23H2_2024_05_22631_3593_PRO.esd"
+        Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.us-east-1.amazonaws.com/Kaseya/Windows10/install_24H2_2024_05_26100_712_PRO.esd"
     }
     # Set drive label name
     Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
