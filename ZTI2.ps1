@@ -99,6 +99,9 @@ if ($currentVersion -ge [version]'24.3.10.1') {
         $Global:StartOSDCloudGUI = $baseConfig
     }
 
+    # JSON files
+    $Entra = "aHR0cHM6Ly9jbGFya2NvbnN0cnVjdGlvbi5ib3guY29tL3NoYXJlZC9zdGF0aWMvZmxpOG84MHAwd2Njd2o2ODh6aG1peGdqemsxNXd6b20uanNvbg=="  
+    $Travel = "aHR0cHM6Ly9jbGFya2NvbnN0cnVjdGlvbi5ib3guY29tL3NoYXJlZC9zdGF0aWMvdXpmbHRrcjhtbGx5ZDR0N3hsZDY0ZnFlbmR0Ymd0NmouanNvbg==" 
 
     # Common deployment message
     $deploymentMessages = @(
@@ -113,10 +116,10 @@ if ($currentVersion -ge [version]'24.3.10.1') {
     # Handle deployment based on user selection
     switch ($action) {
         1 {
-            Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/fli8o80p0wccwj688zhmixgjzk15wzom.json" -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
+            Invoke-WebRequest -Uri ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Entra))) -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json 
         }
         2 {
-            Invoke-WebRequest -Uri "https://clarkconstruction.box.com/shared/static/uzfltkr8mllyd4t7xld64fqendtbgt6j.json" -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
+            Invoke-WebRequest -Uri ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Travel))) -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json 
         }
         3 {
             Start-OSDCloud
