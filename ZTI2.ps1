@@ -1,144 +1,138 @@
 <#
- # Description: Script to Run Cloud Image
- # Created: 05/10/2021 by Danial
+ # Description : Script to Run Cloud Image
+ # Created : 05/10/2021 by Danial
  #>
 
-# Clear the host to ensure a clean environment
-Clear-Host
-
-# Retrieve the currently installed version of the OSD module
-$currentVersion = (Get-Module -ListAvailable OSD | Sort-Object Version -Descending | Select-Object -First 1).Version
-
-# Retrieve the latest available version of the OSD module from the PowerShell gallery
-$latestVersion = (Find-Module -Name OSD | Sort-Object Version -Descending | Select-Object -First 1).Version
-
-# Compare versions and install/update the OSD module if necessary
-if ($currentVersion -lt $latestVersion) {
-    Install-Module -Name OSD -Force
-    Import-Module OSD
+# Function to decode obfuscated strings
+function Decode-String {
+    param ([string]$EncodedString)
+    [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($EncodedString))
 }
 
-# Final check for the OSD module version
-$currentVersion = (Get-Module -ListAvailable OSD | Sort-Object Version -Descending | Select-Object -First 1).Version
-
-if ($currentVersion -ge [version]'24.3.10.1') {
-
+# Function to display banner
+function Show-Banner {
     Clear-Host
-    # Display startup message
-    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Write-Host ("=" * 73) -ForegroundColor Cyan
     Write-Host "===================== Cloud Image Deployment Script =====================" -ForegroundColor Cyan
-    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Write-Host ("=" * 73) -ForegroundColor Cyan
     Write-Host "========================== Starting Imaging ZTI =========================" -ForegroundColor Cyan
-    Write-Host "================= Edition - 24H2 == Build - 26100.712 ===================" -ForegroundColor Cyan
-    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Write-Host "================= Edition - 23H2 == Build - 22631.3737 ==================" -ForegroundColor Cyan
+    Write-Host ("=" * 73) -ForegroundColor Cyan
     Start-Sleep -Seconds 5
-
-    # Deployment method choices
-    $actionChoice = [System.Management.Automation.Host.ChoiceDescription[]]@(
-        (New-Object System.Management.Automation.Host.ChoiceDescription("&Hybrid", "Hybrid Joined Machine")),
-        (New-Object System.Management.Automation.Host.ChoiceDescription("&EntraID", "EntraID Joined Machine")),
-        (New-Object System.Management.Automation.Host.ChoiceDescription("&Travel", "EntraID Joined Machine for Travel")),
-        (New-Object System.Management.Automation.Host.ChoiceDescription("&Donation PC", "Regular Image for Donation PC"))
-    )
-
-    # Prompt user to select a deployment method
-    $action = $Host.Ui.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
-
-    # Base configuration for OSDCloudGUI with default values
-    $baseConfig = @{
-        ZTI                  = $true
-        HPIADrivers          = $true
-        HPIAFirmware         = $true
-        HPTPMUpdate          = $true
-        HPBIOSUpdate         = $true
-        updateDiskDrivers    = $true
-        updateFirmware       = $true
-        updateNetworkDrivers = $true
-        updateSCSIDrivers    = $true
-        SyncMSUpCatDriverUSB = $true
-        WindowsUpdate        = $true
-        WindowsUpdateDrivers = $true
-    }
-
-    # Specific configuration for Donation PC Deployment
-    $donationPCConfig = @{
-        ApplyManufacturerDrivers   = $false
-        ApplyCatalogDrivers        = $false
-        ApplyCatalogFirmware       = $false
-        AutopilotJsonChildItem     = $false
-        AutopilotJsonItem          = $false
-        AutopilotJsonName          = $false
-        AutopilotJsonObject        = $false
-        AutopilotOOBEJsonChildItem = $false
-        AutopilotOOBEJsonItem      = $false
-        AutopilotOOBEJsonName      = $false
-        AutopilotOOBEJsonObject    = $false
-        ImageFileFullName          = $false
-        ImageFileItem              = $false
-        ImageFileName              = $false
-        OOBEDeployJsonChildItem    = $false
-        OOBEDeployJsonItem         = $false
-        OOBEDeployJsonName         = $false
-        OOBEDeployJsonObject       = $false
-        Restart                    = $false
-        SkipAutopilot              = $true
-        SkipAutopilotOOBE          = $true
-        SkipODT                    = $true
-        SkipOOBEDeploy             = $true 
-        OSName                     = 'Windows 11 23H2 x64'
-        OSEdition                  = 'Pro'
-        OSActivation               = 'Retail'
-        OSLanguage                 = 'en-us'
-    }
-
-    # Apply specific configuration based on user selection
-    if ($action -eq 3) {
-        $Global:StartOSDCloudGUI = $baseConfig + $donationPCConfig
-    }
-    else {
-        $Global:StartOSDCloudGUI = $baseConfig
-    }
-
-    # JSON files
-    $Entra = "aHR0cHM6Ly9jbGFya2NvbnN0cnVjdGlvbi5ib3guY29tL3NoYXJlZC9zdGF0aWMvZmxpOG84MHAwd2Njd2o2ODh6aG1peGdqemsxNXd6b20uanNvbg=="  
-    $Travel = "aHR0cHM6Ly9jbGFya2NvbnN0cnVjdGlvbi5ib3guY29tL3NoYXJlZC9zdGF0aWMvdXpmbHRrcjhtbGx5ZDR0N3hsZDY0ZnFlbmR0Ymd0NmouanNvbg==" 
-
-    # Common deployment message
-    $deploymentMessages = @(
-        "========================== Hybrid Deployment ============================",
-        "========================= AzureAD Deployment ============================",
-        "========================= Travel PC Deployment ==========================",
-        "======================== Donation PC Deployment ========================="
-    )
-
-    Write-Host $deploymentMessages[$action] -ForegroundColor Cyan
-
-    # Handle deployment based on user selection
-    switch ($action) {
-        1 {
-            Invoke-WebRequest -Uri ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Entra))) -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json 
-        }
-        2 {
-            Invoke-WebRequest -Uri ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Travel))) -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json 
-        }
-        3 {
-            Start-OSDCloud
-        }
-    }
-
-    # Common deployment tasks for non-donation PCs
-    if ($action -ne 3) {
-        Start-OSDCloud -ImageFileUrl "https://ccgsoftdist.s3.us-east-1.amazonaws.com/Kaseya/Windows10/install_24H2_2024_05_26100_712_PRO.esd"
-    }
-    # Set drive label name
-    Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
-
-    # Restart from WinPE
-    Write-Host "Restarting in 10 seconds!" -ForegroundColor Cyan
-    Start-Sleep -Seconds 10
-    wpeutil reboot
-
 }
-else {
-    Write-Host "The required module is not loaded. Please check the network connection and try again!" -ForegroundColor Cyan
+
+# Function to update OSD module
+function Update-OSDModule {
+    $installedVersion = (Get-Module -ListAvailable OSD | Sort-Object Version -Descending | Select-Object -First 1).Version
+    $onlineVersion = (Find-Module -Name OSD).Version
+
+    if ($installedVersion -lt $onlineVersion) {
+        Install-Module -Name OSD -Force
+        Import-Module OSD
+    }
+
+    $updatedVersion = (Get-Module -ListAvailable OSD | Sort-Object Version -Descending | Select-Object -First 1).Version
+    if ($updatedVersion -lt [version]'24.3.10.1') {
+        Write-Host "The required module version is not loaded. Please check the network connection and try again!" -ForegroundColor Cyan
+        exit
+    }
 }
+
+# Function to set up deployment
+function Set-DeploymentConfig {
+    param (
+        [string]$DeploymentType,
+        [string]$EncodedJsonUrl
+    )
+    Write-Host ("=" * 73) -ForegroundColor Cyan
+    Write-Host "========================== $DeploymentType Deployment ============================" -ForegroundColor Cyan
+    Write-Host ("=" * 73) -ForegroundColor Cyan
+
+    if ($EncodedJsonUrl) {
+        $JsonUrl = Decode-String $EncodedJsonUrl
+        Invoke-WebRequest -Uri $JsonUrl -OutFile X:\OSDCloud\Config\AutopilotJSON\AutopilotProfile.json
+    }
+}
+
+# Main script
+Update-OSDModule
+Show-Banner
+
+# Select Deployment Method
+$actionChoice = @(
+    [System.Management.Automation.Host.ChoiceDescription]::new("&Hybrid", "Hybrid Joined Machine")
+    [System.Management.Automation.Host.ChoiceDescription]::new("&AAD", "AzureAD Joined Machine")
+    [System.Management.Automation.Host.ChoiceDescription]::new("&Travel", "AzureAD Joined Machine for Travel")
+    [System.Management.Automation.Host.ChoiceDescription]::new("&Donation PC", "Regular Image for Donation PC")
+)
+
+$action = $Host.UI.PromptForChoice("Deployment Method", "Select a Deployment method to perform imaging", $actionChoice, 0)
+
+$Global:StartOSDCloudGUI = @{
+    ZTI                  = $true
+    HPIADrivers          = $true
+    HPIAFirmware         = $true
+    HPTPMUpdate          = $true
+    HPBIOSUpdate         = $true
+    OSName               = 'Windows 11 23H2 x64'
+    OSEdition            = 'Pro'
+    OSActivation         = 'Retail'
+    OSLanguage           = 'en-us'
+    updateDiskDrivers    = $true
+    updateFirmware       = $true
+    updateNetworkDrivers = $true
+    updateSCSIDrivers    = $true
+    SyncMSUpCatDriverUSB = $true
+    WindowsUpdate        = $true
+    WindowsUpdateDrivers = $true
+}
+
+switch ($action) {
+    0 { Set-DeploymentConfig -DeploymentType "Hybrid" }
+    1 { Set-DeploymentConfig -DeploymentType "AzureAD" -EncodedJsonUrl "aHR0cHM6Ly9jbGFya2NvbnN0cnVjdGlvbi5ib3guY29tL3NoYXJlZC9zdGF0aWMvZmxpOG84MHAwd2Njd2o2ODh6aG1peGdqemsxNXd6b20uanNvbg==" }
+    2 { Set-DeploymentConfig -DeploymentType "Travel PC" -EncodedJsonUrl "aHR0cHM6Ly9jbGFya2NvbnN0cnVjdGlvbi5ib3guY29tL3NoYXJlZC9zdGF0aWMvdXpmbHRrcjhtbGx5ZDR0N3hsZDY0ZnFlbmR0Ymd0NmouanNvbg==" }
+    3 { Set-DeploymentConfig -DeploymentType "Donation PC"
+        $Global:StartOSDCloudGUI += @{
+            ApplyManufacturerDrivers   = $false
+            ApplyCatalogDrivers        = $false
+            ApplyCatalogFirmware       = $false
+            AutopilotJsonChildItem     = $false
+            AutopilotJsonItem          = $false
+            AutopilotJsonName          = $false
+            AutopilotJsonObject        = $false
+            AutopilotOOBEJsonChildItem = $false
+            AutopilotOOBEJsonItem      = $false
+            AutopilotOOBEJsonName      = $false
+            AutopilotOOBEJsonObject    = $false
+            ImageFileFullName          = $false
+            ImageFileItem              = $false
+            ImageFileName              = $false
+            OOBEDeployJsonChildItem    = $false
+            OOBEDeployJsonItem         = $false
+            OOBEDeployJsonName         = $false
+            OOBEDeployJsonObject       = $false
+            Restart                    = $false
+            SkipAutopilot              = $true
+            SkipAutopilotOOBE          = $true
+            SkipODT                    = $true
+            SkipOOBEDeploy             = $true
+        }
+        Start-OSDCloud
+        Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
+        Write-Host "Restarting in 10 seconds!" -ForegroundColor Cyan
+        Start-Sleep -Seconds 10
+        wpeutil reboot
+        exit
+    }
+}
+
+$encodedImageFileUrl = "aHR0cHM6Ly9jY2dzb2Z0ZGlzdC5zMy51cy1lYXN0LTEuYW1hem9uYXdzLmNvbS9LYXNleWEvV2luZG93czEwL2luc3RhbGxfMjRIMl8yMDI0XzA1XzI2MTAwXzcxMl9QUk8uZXNk"
+$imageFileUrl = Decode-String $encodedImageFileUrl
+
+Start-OSDCloud -ImageFileUrl $imageFileUrl
+
+Set-Volume -DriveLetter C -NewFileSystemLabel "Windows"
+
+Write-Host "Restarting in 10 seconds!" -ForegroundColor Cyan
+Start-Sleep -Seconds 10
+wpeutil reboot
